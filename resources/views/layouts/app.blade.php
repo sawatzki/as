@@ -71,7 +71,7 @@
                 </div>
             </div>
         </nav>
-
+        @include('layouts.menu')
         <main class="py-4">
             @yield('content')
         </main>
