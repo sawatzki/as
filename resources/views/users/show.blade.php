@@ -3,8 +3,10 @@
 @section('content')
 
     @foreach($users as $user)
-        {{  $user->id . ": " . $user->name }} <br>
+        <a href="{{ route('user_details', ['user'=>$user]) }}">
+        {{ $user->id . ": " . $user->name }} <br>
         {{ $user->email }} <hr>
+        </a>
     @endforeach
 
 @endsection
