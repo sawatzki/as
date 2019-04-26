@@ -8,14 +8,22 @@ use Illuminate\Http\Request;
 
 class UsersController extends Controller
 {
-
-    public function show_roles(){
-
+    public function showRoles(){
         $roles = Role::all();
-        return view('users.show_roles', ['roles'=>$roles]);
+        return view('users.roles', ['roles'=>$roles]);
     }
 
-    public function show(){
+    public function showRoles2(){
+        $roles = Role::all();
+        return view('users.roles', ['roles'=>$roles]);
+    }
+
+
+    public function showDetails(User $user){
+        return view('users.details', ['user'=>$user]);
+    }
+
+    public function showAll(){
         $users = User::all();
         return view('users.show', ['users'=>$users]);
     }
