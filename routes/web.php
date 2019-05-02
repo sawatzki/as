@@ -18,7 +18,8 @@ Route::get('/', function () {
 Auth::routes();
 
 #contacts
-Route::post('/contacts/show', 'ContactsController@insertContacts')->name('contacts_insert');
+Route::get('/contacts/details', 'ContactsController@detailsContacts')->name('contact_details');
+Route::post('/contacts/insert', 'ContactsController@insertContacts')->name('contact_insert');
 Route::get('/contacts/show', 'ContactsController@showContacts')->name('contacts_show');
 
 #users

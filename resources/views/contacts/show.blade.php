@@ -2,16 +2,13 @@
 
 @section('content')
 
-
-    <form method="post" action="{{ route('contacts_insert') }}">
+    <form method="post" action="{{ route('contact_insert') }}">
         <input type="text" name="contact_name">
         <input type="submit" value="insert">
         {{ csrf_field() }}
     </form>
 
-
-
     @foreach($contacts as $contact)
-        {{ $contact }} <br>
+        <a href="{{ route('contact_details') }}">{{ $contact->name }}</a><br>
     @endforeach
 @endsection
