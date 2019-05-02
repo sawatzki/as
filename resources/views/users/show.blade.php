@@ -15,7 +15,7 @@
             <a href="{{ route('user_details', ['user'=>$user]) }}">
                 <tr>
                     <th scope="row">{{ $user->id }}</th>
-                    <td>{{ $user->name }}</td>
+                    <td><a href="{{ route('user_details', ['user' => $user]) }}">{{ $user->name }}</a></td>
                     <td>{{ $user->email }}</td>
                 </tr>
             </a>

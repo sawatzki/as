@@ -17,7 +17,14 @@ Route::get('/', function () {
 
 Auth::routes();
 
+#contacts
+Route::post('/contacts/show', 'ContactsController@insertContacts')->name('contacts_insert');
+Route::get('/contacts/show', 'ContactsController@showContacts')->name('contacts_show');
+
+#users
 Route::get('/users/roles', 'UsersController@showRoles')->name('users_roles');
 Route::get('/users/{user}', 'UsersController@showDetails')->name('user_details');
 Route::get('/users', 'UsersController@showAll')->name('users_show');
+
+#home
 Route::get('/home', 'HomeController@index')->name('home');
