@@ -4,7 +4,7 @@
 
     <form method="post" action="{{ route('contact_insert') }}">
         <input type="text" name="contact_name">
-        <input type="submit" value="insert">
+        <input type="submit" value="Insert">
         {{ csrf_field() }}
     </form>
 

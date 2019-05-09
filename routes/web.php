@@ -18,6 +18,11 @@ Route::get('/', function () {
 Auth::routes();
 
 #contacts
+Route::get('/test', function(){
+    return "test1";
+});
+
+
 Route::get('/contacts/show', 'ContactsController@contactsShow')->name('contacts_show');
 Route::post('/contact/insert', 'ContactsController@contactInsert')->name('contact_insert');
 Route::get('/contact/{contact}', 'ContactsController@contactDetails')->name('contact_details');
