@@ -18,9 +18,11 @@ Route::get('/', function () {
 Auth::routes();
 
 #contacts
-Route::get('/contacts/details', 'ContactsController@detailsContacts')->name('contact_details');
-Route::post('/contacts/insert', 'ContactsController@insertContacts')->name('contact_insert');
-Route::get('/contacts/show', 'ContactsController@showContacts')->name('contacts_show');
+Route::get('/contacts/show', 'ContactsController@contactsShow')->name('contacts_show');
+Route::post('/contact/insert', 'ContactsController@contactInsert')->name('contact_insert');
+Route::get('/contact/{contact}', 'ContactsController@contactDetails')->name('contact_details');
+Route::patch('/contact/{contact}', 'ContactsController@contactUpdate')->name('contact_update');
+Route::delete('/contact/{contact}', 'ContactsController@contactDelete')->name('contact_delete');
 
 #users
 Route::get('/users/roles', 'UsersController@showRoles')->name('users_roles');

@@ -9,6 +9,11 @@
     </form>
 
     @foreach($contacts as $contact)
-        <a href="{{ route('contact_details') }}">{{ $contact->name }}</a><br>
+        <a href="{{ route('contact_details', ['contact'=>$contact]) }}">{{ $contact->name }}</a><br>
+        <form method="post" action="{{ route('contact_delete', ['contact'=>$contact]) }}">
+            <input type="submit" value="delete">
+            {{ csrf_field() }}
+            @method('DELETE')
+        </form>
     @endforeach
 @endsection
