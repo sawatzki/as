@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Contact;
+use App\Events\ContactsEvent;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -79,6 +80,7 @@ class ContactsController extends Controller
         $contact = new Contact();
         $contact->insertContact($validated);
 
+        event(new ContactsEvent($contact));
         return redirect()->back();
     }
 
