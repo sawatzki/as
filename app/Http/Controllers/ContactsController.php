@@ -19,6 +19,50 @@ class ContactsController extends Controller
         $contact->delete();
         return redirect()->back();
     }
+    protected function showUpdate000(Project $project)
+    {
+        return view('projects.update', ['project' => $project]);
+    }
+
+    protected function updateShowForm(Contact $contact){
+        return view('contacts.update', ['contact' => $contact]);
+    }
+    protected function showUpdate(Contact $contact)
+    {
+        echo "UPD FORM";
+        #die();
+        return view('contacts.update', ['contact' => $contact]);
+    }
+
+    protected function contactUpdate(Request $request, Contact $contact)
+    {
+        echo "UPDATED controller";
+;
+        $validatedData = $request->validate([
+            'contact_name' => 'required|string',
+        ]);
+        $contact->updateContact($validatedData);
+
+        #return redirect('/contacts');
+    }
+
+    public function contactUpdate1(Request $request){
+        die();
+        $request = new Request([
+            'contact_name' => $request->contact_name,
+            'user_id' => Auth::user()->id
+        ]);
+
+        $validated = $this->validate($request, [
+            'contact_name' => 'required|string',
+            'user_id' => 'required'
+        ]);
+
+        $contact = new Contact();
+        $contact->updateContact($validated);
+
+        #return redirect()->back();
+    }
 
     public function contactInsert(Request $request)
     {
