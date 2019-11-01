@@ -1,5 +1,12 @@
 @extends('layouts.app')
 
 @section('content')
-{{ $contact }}
+
+    <table>
+        <tr>
+            <td>{{ $contact->name }}</td>
+        </tr>
+    </table>
+
+    {{ $contact }}
 @endsection

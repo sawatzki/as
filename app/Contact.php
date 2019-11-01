@@ -18,9 +18,8 @@ class Contact extends Model
 
     public function updateContact($data)
     {
-
         $this->name = $data['contact_name'];
-        $this->user_id = $data['user_id'];echo "1111111";
+        $this->user_id = $data['user_id'];
 
         return $this->update();
     }

@@ -11,7 +11,12 @@ class ContactsController extends Controller
 
     public function contactDetails(Contact $contact)
     {
-        return view('contacts.details', ['contact'=>$contact]);
+        return view('contacts.details', ['contact' => $contact]);
+    }
+
+    public function contactEdit(Contact $contact)
+    {
+        return view('contact.edit');
     }
 
     public function contactDelete(Contact $contact)
@@ -19,38 +24,28 @@ class ContactsController extends Controller
         $contact->delete();
         return redirect()->back();
     }
-    protected function showUpdate000(Project $project)
-    {
-        return view('projects.update', ['project' => $project]);
-    }
 
-    protected function updateShowForm(Contact $contact){
+//    protected function showUpdate000(Project $project)
+//    {
+//        return view('projects.update', ['project' => $project]);
+//    }
+
+    protected function updateShowForm(Contact $contact)
+    {
         return view('contacts.update', ['contact' => $contact]);
     }
+
+
     protected function showUpdate(Contact $contact)
     {
-        echo "UPD FORM";
-        #die();
         return view('contacts.update', ['contact' => $contact]);
     }
 
     protected function contactUpdate(Request $request, Contact $contact)
     {
-        echo "UPDATED controller";
-;
-        $validatedData = $request->validate([
-            'contact_name' => 'required|string',
-        ]);
-        $contact->updateContact($validatedData);
-
-        #return redirect('/contacts');
-    }
-
-    public function contactUpdate1(Request $request){
-        die();
         $request = new Request([
-            'contact_name' => $request->contact_name,
-            'user_id' => Auth::user()->id
+            'contact_name' => $request->name,
+            'user_id' => $contact->user_id,
         ]);
 
         $validated = $this->validate($request, [
@@ -58,17 +53,15 @@ class ContactsController extends Controller
             'user_id' => 'required'
         ]);
 
-        $contact = new Contact();
         $contact->updateContact($validated);
-
-        #return redirect()->back();
+        return redirect()->back();
     }
 
     public function contactInsert(Request $request)
     {
         $request = new Request([
             'contact_name' => $request->contact_name,
-            'user_id' => Auth::user()->id
+            'user_id' => Auth::user()->id,
         ]);
 
         $validated = $this->validate($request, [
@@ -85,6 +78,6 @@ class ContactsController extends Controller
     public function contactsShow()
     {
         $contacts = Contact::orderBy('id', 'desc')->get();
-        return view('contacts.show', ['contacts'=>$contacts]);
+        return view('contacts.show', ['contacts' => $contacts]);
     }
 }
