@@ -2,8 +2,7 @@
 
 use App\User;
 use Illuminate\Database\Seeder;
-use App\Models\Note;
-use App\RoleUser;
+use App\Models\UserRole;
 
 class UsersTableSeeder extends Seeder
 {
@@ -43,7 +42,7 @@ class UsersTableSeeder extends Seeder
                     }
 
                     $u->userRoles()->save(
-                        factory(RoleUser::class)->make([
+                        factory(UserRole::class)->make([
                             'role_id' => $role_id,
                         ])
                     );
@@ -56,7 +55,7 @@ class UsersTableSeeder extends Seeder
 
             function ($u) {
                 $u->userRoles()->save(
-                    factory(RoleUser::class)->make([
+                    factory(UserRole::class)->make([
                         'role_id' => 3,
                     ])
                 );
