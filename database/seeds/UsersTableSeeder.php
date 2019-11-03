@@ -2,6 +2,8 @@
 
 use App\User;
 use Illuminate\Database\Seeder;
+use App\Models\Note;
+use App\RoleUser;
 
 class UsersTableSeeder extends Seeder
 {
@@ -12,31 +14,54 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
-        $user = new User();
-        $user->name = 'Artem';
-        $user->email = 'artem@gmx.de';
-        $user->password = bcrypt('1234567890');
-        $user->save();
 
-        $user = new User();
-        $user->name = 'Wladimir';
-        $user->email = 'wladimir@gmx.de';
-        $user->password = bcrypt('1234567890');
-        $user->save();
+        $users = [
+            [
+                'name' => 'Artem Sawatzki',
+                'email' => 'artem@gmx.de',
+                'password' => bcrypt('1234567890'),
+            ],
+            [
+                'name' => 'Wladimir Keller',
+                'email' => 'wladimir@gmail.com',
+                'password' => bcrypt('1234567890'),
+            ],
+            [
+                'name' => 'Ivan Sawatzki',
+                'email' => 'ivan@mail.ru',
+                'password' => bcrypt('1234567890'),
+            ],
+        ];
 
-        $user = new User();
-        $user->name = 'Ivan';
-        $user->email = 'ivan@gmx.de';
-        $user->password = bcrypt('1234567890');
-        $user->save();
+        foreach ($users as $item) {
+            factory(User::class, 1)->create($item)->each(
+                function ($u) {
+                    if ($u['email'] == 'artem@gmx.de') {
+                        $role_id = 1;
+                    } else {
+                        $role_id = 2;
+                    }
 
-        for ($i = 0; $i < 10; $i++){
-            $user = new User();
-            $user->name = 'user' . $i;
-            $user->email = $i.'artem@gmx.de';
-            $user->password = bcrypt('1234567890');
-            $user->save();
+                    $u->userRoles()->save(
+                        factory(RoleUser::class)->make([
+                            'role_id' => $role_id,
+                        ])
+                    );
+                }
+            );
         }
+
+
+        factory(User::class, 10)->create()->each(
+
+            function ($u) {
+                $u->userRoles()->save(
+                    factory(RoleUser::class)->make([
+                        'role_id' => 3,
+                    ])
+                );
+            }
+        );
 
     }
 }

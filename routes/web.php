@@ -17,10 +17,20 @@ Route::get('/', function () {
 
 Auth::routes();
 
-#contacts
-Route::get('/contact/{contact}/form', 'ContactsController@updateShowForm')->name('contact_update_form');
+
+
+
+
+#notes
+/*Route::group(['namespace' => 'Blog', 'prefix' => 'blog'],function (){
+    Route::resource('posts', 'postcontroller')->names('blog.posts');
+});*/
+Route::group(['prefix' => 'note'], function (){
+    Route::resource('notes', 'NotesController')->names('notes');
+});
 
 #contacts
+Route::get('/contact/{contact}/form', 'ContactsController@updateShowForm')->name('contact_update_form');
 Route::get('/contacts/show', 'ContactsController@contactsShow')->name('contacts_show');
 Route::post('/contact/insert', 'ContactsController@contactInsert')->name('contact_insert');
 Route::get('/contact/{contact}', 'ContactsController@contactDetails')->name('contact_details');

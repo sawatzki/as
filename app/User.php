@@ -12,6 +12,12 @@ class User extends Authenticatable
         'name', 'email', 'password',
     ];
 
+    public function notes(){
+        return $this->hasMany('App\Models\Note');
+    }
 
+    public function userRoles(){
+        return $this->hasMany('App\RoleUser');
+    }
 
 }
